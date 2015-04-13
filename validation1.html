@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<style>		
+		.inputClass {
+			display: inline-block;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.7/dijit/themes/claro/claro.css">
+	<script>
+		dojoConfig = {parseOnLoad: true}
+	
+		var onlyLetters = function(constraints){
+			console.log(1);
+			return '/^[a-zA-Z]+$/';
+		};
+		var onlyNumbers = function(constraints){
+		console.log(2);
+			return '/^\d+$/';
+		};
+	</script>
+	<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js'></script>
+	
+	<script>
+		dojo.require("dojo.parser");  
+		dojo.require("dijit.form.ValidationTextBox");
+	</script>
+</head>
+<body class="claro">
+    <label for="firstname">Full Name: </label>
+	<input	
+		placeholder="My name..."
+		type="text"
+		id="firstName"
+		dojoType="dijit.form.ValidationTextBox"
+		required="true"
+		propercase="true"
+		promptMessage="Enter first name."
+		invalidMessage="First name is required."
+		trim="true"
+	/>
+	<br />
+	<label for="phone">10 Digits Phone Number: </label>
+	<input type="text" name="phone" id="phone" placeholder="0123456789" class="inputClass"
+		data-dojo-type="dijit.form.ValidationTextBox"
+		data-dojo-props=
+			"regExp:'\\d{10}', 
+			required:true, 
+			invalidMessage:'Invalid telephone number'"
+	/>
+	<br />
+	<label for="email1">Email Address: </label>
+	<input type="text" name="email1" id="email1" value="email@email.com" class="inputClass"
+		data-dojo-type="dijit.form.ValidationTextBox"
+		data-dojo-props=
+			"regExp: '^[a-zA-Z]+(([\',\.-][a-zA-Z ])?[a-zA-Z]*)*$', 
+			required:true, 
+			invalidMessage:'Invalid email address'"
+	/>
+	<br />
+	<label for="zip1">Zip Code Letters</label>
+	<input type="text" name="zip1" value="00000" id="zip1" required="true"
+		data-dojo-type="dijit.form.ValidationTextBox"
+		data-dojo-props="regExpGen:onlyLetters, invalidMessage:'Zip code - Only letters'"
+	/>
+	<br />
+	<label for="zip2">Zip Code Letters</label>
+	<input type="text" name="zip2" value="00000" id="zip2" required="true"
+		data-dojo-type="dijit.form.ValidationTextBox"
+		data-dojo-props="regExpGen:onlyNumbers, invalidMessage:'Zip code - Only numbers'"
+	/>
+</body>
+</html>
